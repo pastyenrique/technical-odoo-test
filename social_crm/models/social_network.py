@@ -8,11 +8,7 @@ class SocialNetwork(models.Model):
     type = fields.Selection([
         ('facebook', 'Facebook'),
         ('linkedin', 'LinkedIn'),
-        ('instagram', 'Instagram'),
-        ('twitter', 'Twitter'),
-        ('youtube', 'YouTube'),
-        ('tiktok', 'TikTok'),
-        ('other', 'Other')
+        ('instagram', 'Instagram')
     ], string="Tipo Red Social", required=True)
     image = fields.Binary("Icono Red Social", required=True)
     partner_id = fields.Many2one('res.partner', string="User", ondelete='cascade')
