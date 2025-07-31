@@ -1,0 +1,13 @@
+*.pyc
+*.swp
+*.egg-info
+*.pot
+*.mo
+__pycache__/
+*.log
+*.tmp
+*.db
+*.pid
+*.DS_Store
+.coverage
+htmlcov/

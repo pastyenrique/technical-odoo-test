@@ -1,0 +1,56 @@
+<odoo>
+    <template id="clients_page" name="Clientes Page">
+        <t t-call="website.layout">
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Nuestros Clientes</h1>
+                        <form method="get" action="/page/clients" class="mb-4">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="Buscar clientes..." t-att-value="search"/>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Buscar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <t t-foreach="partners" t-as="partner">
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <t t-esc="partner.name"/>
+                                                <t t-if="partner.profile_complete">
+                                                    <img src="/social_crm/static/src/img/complete.png" alt="Perfil completo" title="Perfil completo" style="width: 20px; height: 20px;"/>
+                                                </t>
+                                            </h5>
+                                            <p class="card-text" t-if="partner.comment">
+                                                <small t-esc="partner.comment"/>
+                                            </p>
+                                            <div class="social-links">
+                                                <t t-foreach="partner.social_network_ids" t-as="social">
+                                                    <t t-if="social.url">
+                                                        <a t-att-href="social.url" target="_blank">
+                                                            <img t-att-src="'/social_crm/static/src/img/' + social.media_type + '.png'" alt="Social Media" style="width: 24px; height: 24px;"/>
+                                                        </a>
+                                                    </t>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <t t-call="website.pager" t-options="{'pager': pager}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

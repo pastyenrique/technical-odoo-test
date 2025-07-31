@@ -1,0 +1,54 @@
+<odoo>
+    <record id="view_partner_form_social" model="ir.ui.view">
+        <field name="name">res.partner.form.social</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Redes Sociales">
+                    <field name="social_network_ids">
+                        <tree editable="bottom">
+                            <field name="social_network_id" widget="many2one_clickable"/>
+                            <field name="url" widget="url" placeholder="https://www.socialmedia.com/username"/>
+                            <field name="name" readonly="1"/>
+                            <field name="media_type" readonly="1"/>
+                            <field name="image" widget="image" options='{"size": [25, 25]}' readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="profile_complete" invisible="1"/>
+                <div class="oe_inline" attrs="{'invisible': [('profile_complete', '=', False)]}">
+                    <img src="/social_crm/static/src/img/complete.png" alt="Perfil completo" title="Perfil completo"
+                         style="width: 20px; height: 20px;"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_social" model="ir.ui.view">
+        <field name="name">res.partner.tree.social</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="after">
+                <field name="profile_complete" invisible="1"/>
+                <button name="show_profile_complete" icon="fa-check" type="object" attrs="{'invisible': [('profile_complete', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_filter_social" model="ir.ui.view">
+        <field name="name">res.partner.filter.social</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_country']" position="after">
+                <filter name="incomplete_profiles" string="Perfiles incompletos"
+                        domain="[('profile_complete','=',False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
